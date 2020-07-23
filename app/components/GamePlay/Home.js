@@ -5,7 +5,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import _ from 'lodash';
 import ENV from '../../env';
 import CommonButton from '../../common/CommonButton';
-
+import GameHistory from './GameHistoryModal';
+import GameSettings from './Settings';
+import Messages from './Messages';
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -21,12 +23,51 @@ export default class Home extends Component {
                 { title: 'Lorem Ipsum Title', msg: 'Lorem ipsum dolor sit amet, consectet...' },
                 { title: 'Lorem Ipsum Title', msg: 'Lorem ipsum dolor sit amet, consectet...' },
             ],
-            addTodoModal: false
+            gameHistoryArray: [
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+                { date: '2020-07-23', reason: 'LGFO Progressive', winningAmount: '+5538', balance: '+51' },
+            ],
+            isShowGameHistory: false,
+            isShowGameSettings: false,
+            switch1: false,
+            switch2: false,
+            switch3: false,
+            isShowMessage: false
         }
     }
 
     componentDidMount() {
 
+    }
+
+    _onValueChange(value) {
+        if (value == 1) {
+            this.setState({
+                switch1: !this.state.switch1
+            })
+        } else if (value == 2) {
+            this.setState({
+                switch2: !this.state.switch2
+            })
+        } else {
+            this.setState({
+                switch3: !this.state.switch3
+            })
+        }
     }
 
     renderNotificationItem(item) {
@@ -44,6 +85,24 @@ export default class Home extends Component {
             </View>
         </View>
         return actualComponent;
+    }
+
+    toggleGameHistory() {
+        this.setState({
+            isShowGameHistory: !this.state.isShowGameHistory
+        })
+    }
+
+    toggleGameSettings() {
+        this.setState({
+            isShowGameSettings: !this.state.isShowGameSettings
+        })
+    }
+
+    toggleGameMessage() {
+        this.setState({
+            isShowMessage: !this.state.isShowMessage
+        })
     }
 
     render() {
@@ -91,11 +150,11 @@ export default class Home extends Component {
                             <View style={styles.iconContainer}>
                                 <View style={styles.btnContainer}>
                                     <CommonButton
-                                        onPress={() => this.props.navigation.navigate('GamePlay')}
+                                        onPress={() => this.toggleGameHistory()}
                                         imgUrl={require('../../assets/clipboard.png')}
                                     />
                                     <CommonButton
-                                        onPress={() => alert('Setting')}
+                                        onPress={() => this.toggleGameSettings()}
                                         marginLeft={Platform.isPad ? wp('2%') : wp('3%')}
                                         imgUrl={require('../../assets/settings.png')}
                                     />
@@ -106,7 +165,7 @@ export default class Home extends Component {
                                         imgUrl={require('../../assets/poker_Btn_chip_.png')}
                                     />
                                     <CommonButton
-                                        onPress={() => alert('Message')}
+                                        onPress={() => this.toggleGameMessage()}
                                         marginLeft={Platform.isPad ? wp('2%') : wp('3%')}
                                         imgUrl={require('../../assets/message.png')}
                                     />
@@ -124,18 +183,54 @@ export default class Home extends Component {
                                 renderItem={({ item }) => this.renderNotificationItem(item)}
                             />
                         </View>
+                        {this.state.isShowGameHistory &&
+                            <GameHistory
+                                header={'Game History'}
+                                isVisible={this.state.isShowGameHistory}
+                                data={this.state.gameHistoryArray}
+                                onPress={() => this.toggleGameHistory()}
+                            />
+                        }
+
+                        {this.state.isShowGameSettings &&
+                            <GameSettings
+                                header={'Settings'}
+                                isVisible={this.state.isShowGameSettings}
+                                onPress={() => this.toggleGameSettings()}
+
+                                settingTitle1={'Learn ipsome'}
+                                onValueChange={(value) => this._onValueChange(value)}
+                                switch1={this.state.switch1}
+
+                                settingTitle2={'Learn ipsome'}
+                                onValueChange={(value) => this._onValueChange(value)}
+                                switch2={this.state.switch2}
+
+                                settingTitle3={'Learn ipsome'}
+                                onValueChange={(value) => this._onValueChange(value)}
+                                switch3={this.state.switch3}
+
+                                settingTitle4={'Logout'}
+                                onPressSettingsBtn={() => alert('Logout')}
+
+                            />
+                        }
+
+                        {this.state.isShowMessage &&
+                            <Messages
+                                header={'Messages'}
+                                isVisible={this.state.isShowMessage}
+                                //data={this.state.gameHistoryArray}
+                                onPress={() => this.toggleGameMessage()}
+                            />
+                        }
+
                     </ScrollView>
 
                 </SafeAreaView>
             </Fragment>
 
         )
-    }
-
-    toggleModal() {
-        this.setState({
-            addTodoModal: !this.state.addTodoModal
-        })
     }
 }
 

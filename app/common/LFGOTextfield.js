@@ -186,7 +186,8 @@ const styles = StyleSheet.create({
         width: Platform.isPad ? wp('80%') : wp('95%'), alignSelf: 'center',
         borderColor: '#006EEE',
         borderWidth: wp('0.36%'),
-        paddingHorizontal: Platform.isPad ? wp('5%') : wp('7%'), height: Platform.isPad ? wp('9.11%') : wp('14.5%'),
+        paddingHorizontal: Platform.isPad ? wp('5%') : wp('7%'),
+        height: Platform.isPad ? wp('9.11%') : wp('14.5%'),
         // paddingVertical: Platform.OS == 'android' ? null : hp('2%'),
         marginTop: hp('3%')
     },

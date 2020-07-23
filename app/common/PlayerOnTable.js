@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     joinedContainer: {
         borderRadius: Platform.isPad ? wp('1.3%') : wp('4.83%'),
         paddingVertical: Platform.isPad ? wp('1%') : Platform.OS == 'android' ? wp('1%') : wp('2%'),
-        paddingHorizontal: Platform.isPad ? wp('2%') : Platform.OS == 'android' ? wp('1%') : wp('1%'),
+        paddingHorizontal: Platform.isPad ? wp('2%') : Platform.OS == 'android' ? wp('1%') : wp('2%'),
         borderColor: '#4EBE26',
         borderWidth: Platform.isPad ? wp('0.13%') : wp('0.48%'),
         //width: Platform.isPad ? wp('5%') : wp('22.46%'),
@@ -69,7 +69,9 @@ const styles = StyleSheet.create({
         fontFamily: ENV.regular,
     },
     nameChips: {
-        flexDirection: 'row', marginTop: Platform.isPad ? wp('0.5%') : wp('1%'),
+        flexDirection: 'row',
+        marginTop: Platform.isPad ? wp('0.5%') : wp('1%'),
+
     },
     chipsImg: {
         height: Platform.isPad ? wp('1.95%') : wp('3.38%'),

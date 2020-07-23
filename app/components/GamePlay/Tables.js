@@ -59,34 +59,30 @@ export default class Tables extends Component {
                             />
                             : null
                     }
-                    <Text style={styles.renderTableDateText}>{item.tabledate}</Text>
+                    <Text style={[styles.renderTableDateText, { marginTop: (item.isLive || item.isPreparing) ? hp('-3%') : ((item.isLive || item.isPreparing) && Platform.OS == 'ios') ? null : null }]}>{item.tabledate}</Text>
 
                     <View style={styles.renderInnerContainer}>
                         <View>
                             <Text style={styles.renderTableName}>{item.tableName}</Text>
                             <Text style={styles.renderTableAmount}>{item.tableAmount}</Text>
                         </View>
-                        <View style={styles.renderTableSizeContainer}>
+                        <TouchableOpacity
+                            onPress={() => this.toggleModal()}
+                            style={styles.renderTableSizeContainer}>
                             <Image
                                 style={styles.renderProfileImg}
                                 source={require('../../assets/user_deafult_profile.png')}
                             />
                             <Text style={styles.renderTableSize}>{item.tableSize}</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 {(item.isLive || item.isPreparing) && <GradientButton
                     width={Platform.isPad ? wp('27.93%') : wp('28.75%')}
-                    height={Platform.isPad ? wp('9.70%') : wp('10.63%')}
+                    height={Platform.isPad ? wp('9.11%') : wp('10.63%')}
                     marginTop={Platform.isPad ? wp('-4.85%') : wp('-5.32%')}
                     blueShadow={true}
-                    onPress={() => {
-                        if (item.isLive) {
-                            this.toggleModal()
-                        } else {
-                            this.toggleModal()
-                        }
-                    }}
+                    onPress={() => this.props.navigation.navigate('GamePlay')}
                     btnText={'Join'}
                 />}
             </>
@@ -161,6 +157,7 @@ const styles = StyleSheet.create({
         color: '#92AFC6',
         fontSize: Platform.isPad ? wp('3.38%') : wp('3.38%'),
         textAlign: 'right',
+
         //right: wp('3.38%')
     },
     renderInnerContainer: { flexDirection: 'row', justifyContent: 'space-between' },

@@ -114,7 +114,7 @@ export default class Login extends Component {
                             </View>
                             <GradientButton
                                 marginTop={Platform.isPad ? hp('28%') : hp('6%')}
-                                height={Platform.isPad ? wp('11.33%') : wp('14.5%')}
+                                height={Platform.isPad ? wp('9.11%') : wp('14.5%')}
                                 width={Platform.isPad ? wp('80%') : wp('95%')}
                                 // blueShadow={true}
                                 onPress={() => this.onPressLogin()}

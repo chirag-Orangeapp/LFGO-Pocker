@@ -26,7 +26,7 @@ export default class GamePlay extends Component {
                 { id: 10, name: 'John Langevin', chips: 5200, isJoined: false },
             ],
             isJoinedPlayer1: true,
-            isJoinedPlayer2: true, //true,
+            isJoinedPlayer2: false, //true,
             isJoinedPlayer3: false, //true,
             isJoinedPlayer4: false, //true,
             isJoinedPlayer5: false, //true,
@@ -35,6 +35,12 @@ export default class GamePlay extends Component {
             isJoinedPlayer8: false, //true,
             isJoinedPlayer9: false, //true,
             isJoinedPlayer10: false, //true,
+            isAllPlayerJoined: false
+        }
+        if (this.state.isJoinedPlayer1 && this.state.isJoinedPlayer2 && this.state.isJoinedPlayer3 && this.state.isJoinedPlayer4 && this.state.isJoinedPlayer5 && this.state.isJoinedPlayer6 && this.state.isJoinedPlayer7 && this.state.isJoinedPlayer8 && this.state.isJoinedPlayer9 && this.state.isJoinedPlayer10) {
+            this.setState({ isAllPlayerJoined: true })
+        } else {
+            this.setState({ isAllPlayerJoined: false })
         }
     }
 
@@ -50,13 +56,17 @@ export default class GamePlay extends Component {
         return actualComponent;
     }
 
+
+
     render() {
+        // const { isJoinedPlayer1, isJoinedPlayer2, isJoinedPlayer3, isJoinedPlayer4, isJoinedPlayer5, isJoinedPlayer6, isJoinedPlayer7, isJoinedPlayer8, isJoinedPlayer9, isJoinedPlayer10 } = this.state
+
         return (
             <Fragment>
                 <SafeAreaView style={styles.safeAreaView}>
                     <CommonButton
                         position={'absolute'}
-                        top={Platform.isPad ? hp('5%') : Platform.OS == 'android' ? hp('3%') : hp('6%')}
+                        top={Platform.isPad ? hp('5%') : Platform.OS == 'android' ? hp('1.5%') : hp('4%')}
                         right={Platform.isPad ? wp('4%') : wp('5%')}
                         onPress={() => alert('Drawer')}
                         imgUrl={require('../../assets/menu.png')}
@@ -70,92 +80,65 @@ export default class GamePlay extends Component {
 
                             <View style={styles.gameTable}>
 
-                                {/* <FlatList
-                                    data={this.state.playerArray}
-                                    keyExtractor={item => item.id}
-                                    renderItem={({ item }) => this.renderPlayerItem(item)}
-                                /> */}
-
-                                {/* <PlayerOnTable
-                                    onPress={() => alert('Player 1')}
-                                    top={Platform.isPad ? hp('-6%') : hp('-5%')}
-                                    left={Platform.isPad ? wp('40%') : wp('35%')}
-
-                                /> */}
-
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 1')}
-                                    // top={Platform.isPad ? wp('-4%') : wp('-5%')}
-                                    // right={Platform.isPad ? wp('8%') : wp('5%')}
+                                    // onPress={() => alert('Player 1')}
                                     isJoined={this.state.isJoinedPlayer1}
                                     top={Platform.isPad ? hp('-5%') : hp('-5%')}
-                                    left={Platform.isPad ? wp('25%') : wp('35%')}
+                                    left={Platform.isPad ? wp('35%') : wp('35%')}
                                 />
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 2')}
-                                    // top={Platform.isPad ? hp('5%') : hp('6.75%')}
-                                    // right={Platform.isPad ? wp('2%') : wp('-5%')}
+                                    onPress={() => { this.setState({ isJoinedPlayer2: !this.state.isJoinedPlayer2 }) }}
                                     isJoined={this.state.isJoinedPlayer2}
-                                    top={Platform.isPad ? wp('-2') : wp('-10%')}
-                                    right={Platform.isPad ? wp('4%') : wp('10%')}
+                                    top={Platform.isPad ? wp('-5%') : hp('-3.5%')}
+                                    right={Platform.isPad ? wp('8%') : wp('10%')}
                                 />
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 3')}
+                                    onPress={() => { this.setState({ isJoinedPlayer3: !this.state.isJoinedPlayer3 }) }}
                                     isJoined={this.state.isJoinedPlayer3}
-                                    top={Platform.isPad ? hp('11%') : hp('7%')}
-                                    right={Platform.isPad ? wp('-5%') : wp('-5%')}
+                                    top={Platform.isPad ? hp('5.5%') : hp('4%')}
+                                    right={Platform.isPad ? wp('-2%') : wp('0%')}
                                 />
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 4')}
+                                    onPress={() => { this.setState({ isJoinedPlayer4: !this.state.isJoinedPlayer4 }) }}
                                     isJoined={this.state.isJoinedPlayer4}
-                                    top={Platform.isPad ? hp('25%') : hp('15.5%')}
-                                    right={Platform.isPad ? wp('4%') : wp('-3%')}
+                                    top={Platform.isPad ? hp('16%') : hp('12.5%')}
+                                    right={Platform.isPad ? wp('-2%') : wp('-1%')}
                                 />
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 5')}
+                                    onPress={() => { this.setState({ isJoinedPlayer5: !this.state.isJoinedPlayer5 }) }}
                                     isJoined={this.state.isJoinedPlayer5}
-                                    top={Platform.isPad ? hp('28%') : hp('19%')}
-                                    right={Platform.isPad ? wp('25%') : wp('22%')}
+                                    top={Platform.isPad ? hp('25%') : hp('21%')}
+                                    right={Platform.isPad ? wp('8%') : wp('10%')}
                                 />
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 6')}
+                                    onPress={() => { this.setState({ isJoinedPlayer6: !this.state.isJoinedPlayer6 }) }}
                                     isJoined={this.state.isJoinedPlayer6}
-                                    top={Platform.isPad ? hp('28%') : hp('19%')}
-                                    left={Platform.isPad ? wp('25%') : wp('22%')}
+                                    top={Platform.isPad ? hp('27%') : hp('22%')}
+                                    right={Platform.isPad ? wp('35%') : this.state.isJoinedPlayer6 ? wp('35%') : wp('38%')}
                                 />
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 7')}
-                                    // top={Platform.isPad ? hp('17%') : hp('17%')}
-                                    // left={Platform.isPad ? wp('2%') : wp('-3%')}
+                                    onPress={() => { this.setState({ isJoinedPlayer7: !this.state.isJoinedPlayer7 }) }}
                                     isJoined={this.state.isJoinedPlayer7}
-                                    top={Platform.isPad ? hp('25%') : hp('15.5%')}
-                                    left={Platform.isPad ? wp('4%') : wp('-3%')}
+                                    top={Platform.isPad ? hp('25%') : hp('21%')}
+                                    left={Platform.isPad ? wp('8%') : wp('10%')}
                                 />
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 8')}
-                                    // top={Platform.isPad ? hp('5%') : hp('5%')}
-                                    // left={Platform.isPad ? wp('2%') : wp('-5%')}
+                                    onPress={() => { this.setState({ isJoinedPlayer8: !this.state.isJoinedPlayer8 }) }}
                                     isJoined={this.state.isJoinedPlayer8}
-                                    top={Platform.isPad ? hp('11%') : hp('7%')}
-                                    left={Platform.isPad ? wp('-5%') : wp('-5%')}
+                                    top={Platform.isPad ? hp('16%') : hp('13%')}
+                                    left={Platform.isPad ? wp('-2%') : wp('0%')}
                                 />
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 9')}
-                                    // top={Platform.isPad ? wp('-8%') : wp('-8%')}
-                                    // left={Platform.isPad ? wp('2%') : wp('10%')}
+                                    onPress={() => { this.setState({ isJoinedPlayer9: !this.state.isJoinedPlayer9 }) }}
                                     isJoined={this.state.isJoinedPlayer9}
-                                    top={Platform.isPad ? wp('-2%') : wp('-3%')}
-                                    left={Platform.isPad ? wp('4%') : wp('-1%')}
+                                    top={Platform.isPad ? wp('7%') : hp('4.5%')}
+                                    left={Platform.isPad ? wp('-2%') : wp('0%')}
                                 />
                                 <PlayerOnTable
-                                    onPress={() => alert('Player 10')}
-                                    // top={Platform.isPad ? wp('-6%') : wp('1%')}
-                                    // left={Platform.isPad ? wp('40%') : wp('5%')}
-                                    // top={Platform.isPad ? wp('-4%') : wp('-5%')}
-                                    // left={Platform.isPad ? wp('8%') : wp('3%')}
+                                    onPress={() => { this.setState({ isJoinedPlayer10: !this.state.isJoinedPlayer10 }) }}
                                     isJoined={this.state.isJoinedPlayer10}
-                                    top={Platform.isPad ? hp('-5%') : hp('-5%')}
-                                    left={Platform.isPad ? wp('25%') : wp('22%')}
+                                    top={Platform.isPad ? hp('-3.5%') : Platform.OS == 'android' ? hp('-3.5%') : hp('-3.5%')}
+                                    left={Platform.isPad ? wp('8%') : wp('10%')}
                                 />
                             </View>
 
@@ -221,7 +204,7 @@ const styles = StyleSheet.create({
     gameTable: {
         marginTop: Platform.isPad ? hp('13%') : hp('12%'),
         width: Platform.isPad ? wp('88%') : wp('100%'),
-        height: Platform.isPad ? hp('35%') : Platform.OS == 'android' ? hp('27%') : hp('25%'),
+        height: Platform.isPad ? hp('35%') : Platform.OS == 'android' ? hp('27%') : hp('28%'),
         borderRadius: Platform.isPad ? wp('30%') : wp('30%'),
         borderWidth: Platform.isPad ? wp('3%') : wp('4%'),
         backgroundColor: '#10346f', //'#022D61',
